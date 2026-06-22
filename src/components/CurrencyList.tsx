@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import type { Currency } from '../types';
 import { getCurrencyFlag } from '../utils/flags';
 
@@ -14,6 +15,23 @@ type CurrencyListProps = {
 
 export function CurrencyList(props: CurrencyListProps) {
   const { activeCode, convertedValues, currencies, rates, t, removeCurrency, setActiveAmount, setActiveCode } = props;
+  const [pendingRemove, setPendingRemove] = useState<Currency | null>(null);
+
+  const handleRemoveClick = (currency: Currency) => {
+    if (currencies.length === 1) return;
+    setPendingRemove(currency);
+  };
+
+  const handleConfirmRemove = () => {
+    if (pendingRemove) {
+      removeCurrency(pendingRemove.code);
+      setPendingRemove(null);
+    }
+  };
+
+  const handleCancelRemove = () => {
+    setPendingRemove(null);
+  };
 
   return (
     <section className="currency-list" aria-label={t('currencyList')}>
@@ -39,11 +57,27 @@ export function CurrencyList(props: CurrencyListProps) {
               onFocus={() => setActiveCode(currency.code)}
               placeholder={missingRate ? t('noRate') : '0'}
             />
-            <button className="remove" type="button" onClick={() => removeCurrency(currency.code)} aria-label={`${t('remove')} ${currency.code}`}>×</button>
+            <button className="remove" type="button" onClick={() => handleRemoveClick(currency)} aria-label={`${t('remove')} ${currency.code}`}>×</button>
             {missingRate && <small>{t('updateRateFor')} {currency.code}</small>}
           </article>
         );
       })}
+
+      {pendingRemove && (
+        <div className="confirm-overlay" onClick={handleCancelRemove}>
+          <div className="confirm-dialog" onClick={(e) => e.stopPropagation()}>
+            <h3>{t('confirmRemoveTitle')}</h3>
+            <p>
+              {t('confirmRemoveText')} <strong>{pendingRemove.code}</strong>
+              {pendingRemove.name !== pendingRemove.code && <> ({pendingRemove.name})</>}?
+            </p>
+            <div className="confirm-actions">
+              <button className="secondary" type="button" onClick={handleCancelRemove}>{t('cancel')}</button>
+              <button className="danger" type="button" onClick={handleConfirmRemove}>{t('delete')}</button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

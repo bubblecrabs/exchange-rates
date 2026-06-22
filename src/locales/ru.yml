@@ -23,6 +23,10 @@ noRate: нет курса
 updateRateFor: Обновите курсы для
 currencyList: Список валют
 remove: Удалить
+confirmRemoveTitle: Удалить валюту?
+confirmRemoveText: Вы действительно хотите удалить валюту
+cancel: Отмена
+delete: Удалить
 usd: Доллар США
 eur: Евро
 uah: Украинская гривна

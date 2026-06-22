@@ -23,6 +23,10 @@ noRate: no rate
 updateRateFor: Update rates for
 currencyList: Currency list
 remove: Remove
+confirmRemoveTitle: Remove currency?
+confirmRemoveText: Do you really want to remove
+cancel: Cancel
+delete: Delete
 usd: US Dollar
 eur: Euro
 uah: Ukrainian Hryvnia
