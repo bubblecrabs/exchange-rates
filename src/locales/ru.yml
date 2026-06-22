@@ -23,6 +23,7 @@ noRate: нет курса
 updateRateFor: Обновите курсы для
 currencyList: Список валют
 remove: Удалить
+copy: Копировать сумму
 confirmRemoveTitle: Удалить валюту?
 confirmRemoveText: Вы действительно хотите удалить валюту
 cancel: Отмена

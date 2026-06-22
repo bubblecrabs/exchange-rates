@@ -23,6 +23,7 @@ noRate: no rate
 updateRateFor: Update rates for
 currencyList: Currency list
 remove: Remove
+copy: Copy amount
 confirmRemoveTitle: Remove currency?
 confirmRemoveText: Do you really want to remove
 cancel: Cancel

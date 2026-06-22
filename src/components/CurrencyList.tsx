@@ -16,6 +16,7 @@ type CurrencyListProps = {
 export function CurrencyList(props: CurrencyListProps) {
   const { activeCode, convertedValues, currencies, rates, t, removeCurrency, setActiveAmount, setActiveCode } = props;
   const [pendingRemove, setPendingRemove] = useState<Currency | null>(null);
+  const [copiedCode, setCopiedCode] = useState<string | null>(null);
 
   const handleRemoveClick = (currency: Currency) => {
     if (currencies.length === 1) return;
@@ -31,6 +32,12 @@ export function CurrencyList(props: CurrencyListProps) {
 
   const handleCancelRemove = () => {
     setPendingRemove(null);
+  };
+
+  const handleCopy = (code: string, value: string) => {
+    navigator.clipboard.writeText(value).catch(() => {});
+    setCopiedCode(code);
+    setTimeout(() => setCopiedCode(null), 1500);
   };
 
   return (
@@ -57,6 +64,23 @@ export function CurrencyList(props: CurrencyListProps) {
               onFocus={() => setActiveCode(currency.code)}
               placeholder={missingRate ? t('noRate') : '0'}
             />
+            <button
+              className={`copy${copiedCode === currency.code ? ' copied' : ''}`}
+              type="button"
+              onClick={() => handleCopy(currency.code, convertedValues.get(currency.code) ?? '')}
+              aria-label={t('copy')}
+            >
+              {copiedCode === currency.code ? (
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M2 6l2.5 3L10 3" />
+                </svg>
+              ) : (
+                <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="4.5" y="4.5" width="8" height="8" rx="1.5" />
+                  <rect x="1.5" y="1.5" width="8" height="8" rx="1.5" />
+                </svg>
+              )}
+            </button>
             <button className="remove" type="button" onClick={() => handleRemoveClick(currency)} aria-label={`${t('remove')} ${currency.code}`}>×</button>
             {missingRate && <small>{t('updateRateFor')} {currency.code}</small>}
           </article>
