@@ -8,6 +8,7 @@ export const DEFAULT_SETTINGS: Settings = {
   currencies: getDefaultCurrencies('ru'),
   rates: { USD: 1 },
   ratesDate: '',
+  ratesTimestamp: 0,
   activeCode: 'USD',
   activeAmount: '1',
   theme: 'light',

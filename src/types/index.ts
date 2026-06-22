@@ -17,6 +17,7 @@ export type Settings = {
   currencies: Currency[];
   rates: Record<string, number>;
   ratesDate: string;
+  ratesTimestamp: number;
   activeCode: string;
   activeAmount: string;
   theme: Theme;

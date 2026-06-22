@@ -6,6 +6,7 @@ import { translate } from '../utils/i18n';
 import { loadSettings, saveSettings } from '../utils/storage';
 
 const API_URL = 'https://api.currencyfreaks.com/v2.0/rates/latest';
+const CACHE_TTL_MS = 3_600_000; // 1 hour
 
 export function useCurrencyConverter() {
   const initialSettings = useMemo(loadSettings, []);
@@ -13,6 +14,7 @@ export function useCurrencyConverter() {
   const [currencies, setCurrencies] = useState<Currency[]>(initialSettings.currencies);
   const [rates, setRates] = useState<Record<string, number>>(initialSettings.rates);
   const [ratesDate, setRatesDate] = useState(initialSettings.ratesDate);
+  const [ratesTimestamp, setRatesTimestamp] = useState(initialSettings.ratesTimestamp);
   const [activeCode, setActiveCode] = useState(initialSettings.activeCode);
   const [activeAmount, setActiveAmount] = useState(initialSettings.activeAmount);
   const [theme, setTheme] = useState<Theme>(initialSettings.theme);
@@ -54,8 +56,8 @@ export function useCurrencyConverter() {
   }, [theme]);
 
   useEffect(() => {
-    saveSettings({ apiKey, currencies, rates, ratesDate, activeCode, activeAmount, theme, language });
-  }, [activeAmount, activeCode, apiKey, currencies, language, rates, ratesDate, theme]);
+    saveSettings({ apiKey, currencies, rates, ratesDate, ratesTimestamp, activeCode, activeAmount, theme, language });
+  }, [activeAmount, activeCode, apiKey, currencies, language, rates, ratesDate, ratesTimestamp, theme]);
 
   const updateRates = useCallback(async () => {
     if (!apiKey.trim()) {
@@ -88,6 +90,7 @@ export function useCurrencyConverter() {
 
       setRates(nextRates);
       setRatesDate(payload.date);
+      setRatesTimestamp(Date.now());
     } catch (reason) {
       setError(reason instanceof Error ? reason.message : t('updateError'));
     } finally {
@@ -96,8 +99,9 @@ export function useCurrencyConverter() {
   }, [apiKey, selectedCodes, t]);
 
   useEffect(() => {
-    if (apiKey && !ratesDate) void updateRates();
-  }, [apiKey, ratesDate, updateRates]);
+    const cacheExpired = Date.now() - ratesTimestamp > CACHE_TTL_MS;
+    if (apiKey && (!ratesDate || cacheExpired)) void updateRates();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const addCurrency = (event: FormEvent) => {
     event.preventDefault();
