@@ -1,0 +1,32 @@
+appTitle: Конвертер валют
+subtitle: Введите сумму в любое поле — остальные пересчитаются мгновенно.
+settings: Настройки
+theme: Тема
+language: Язык
+light: Светлая
+dark: Тёмная
+apiKey: API key
+apiHint: Ключ хранится только локально в расширении. В клиентском расширении он технически видим пользователю устройства.
+codePlaceholder: Код, напр. GBP
+namePlaceholder: Название (необязательно)
+add: Добавить
+reset: Вернуть список по умолчанию
+update: Обновить
+updating: Обновляем…
+rates: Курсы
+ratesNotLoaded: Курсы ещё не загружены
+missingApiKey: Добавьте API key CurrencyFreaks в настройках.
+fetchError: Не удалось получить курсы.
+updateError: Не удалось обновить курсы.
+alreadyAdded: уже добавлена.
+noRate: нет курса
+updateRateFor: Обновите курсы для
+currencyList: Список валют
+remove: Удалить
+usd: Доллар США
+eur: Евро
+uah: Украинская гривна
+pln: Польский злотый
+czk: Чешская крона
+kzt: Казахстанский тенге
+byn: Белорусский рубль

@@ -1,0 +1,32 @@
+appTitle: Currency converter
+subtitle: Type an amount in any field — all currencies update instantly.
+settings: Settings
+theme: Theme
+language: Language
+light: Light
+dark: Dark
+apiKey: API key
+apiHint: The key is stored locally in the extension only. In a client-side extension it can still be visible to this device user.
+codePlaceholder: Code, e.g. GBP
+namePlaceholder: Name (optional)
+add: Add
+reset: Reset default list
+update: Update
+updating: Updating…
+rates: Rates
+ratesNotLoaded: Rates not loaded yet
+missingApiKey: Add your CurrencyFreaks API key in settings.
+fetchError: Failed to fetch rates.
+updateError: Failed to update rates.
+alreadyAdded: is already added.
+noRate: no rate
+updateRateFor: Update rates for
+currencyList: Currency list
+remove: Remove
+usd: US Dollar
+eur: Euro
+uah: Ukrainian Hryvnia
+pln: Polish Zloty
+czk: Czech Koruna
+kzt: Kazakhstani Tenge
+byn: Belarusian Ruble
