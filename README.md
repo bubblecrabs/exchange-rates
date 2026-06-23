@@ -2,6 +2,8 @@
 
 A WXT + React browser extension for instant multi-currency conversion powered by CurrencyFreaks.
 
+![Preview](assets/preview.png)
+
 ## Features
 
 - Opens with `1 USD` by default.
