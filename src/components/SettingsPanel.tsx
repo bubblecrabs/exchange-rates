@@ -57,7 +57,7 @@ export function SettingsPanel(props: SettingsPanelProps) {
 
       <label>
         <span>{t('apiKey')}</span>
-        <input value={apiKey} onChange={(event) => setApiKey(event.target.value)} placeholder="YOUR_APIKEY" autoComplete="off" />
+        <input value={apiKey} onChange={(event) => setApiKey(event.target.value)} placeholder="YOUR_APIKEY" autoComplete="off" maxLength={128} />
       </label>
       <p className="hint">{t('apiHint')}</p>
 

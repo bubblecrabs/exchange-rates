@@ -9,6 +9,9 @@ export default defineConfig({
     version: '0.1.0',
     permissions: [],
     host_permissions: ['https://api.currencyfreaks.com/*'],
+    content_security_policy: {
+      extension_pages: "default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https://flagcdn.com; connect-src https://api.currencyfreaks.com",
+    },
     icons: {
       16: '/icons/16.png',
       32: '/icons/32.png',

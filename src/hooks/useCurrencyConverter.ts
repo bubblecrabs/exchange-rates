@@ -79,7 +79,8 @@ export function useCurrencyConverter() {
       const payload = (await response.json()) as LatestRatesResponse | { message?: string; error?: string };
 
       if (!response.ok || !('rates' in payload)) {
-        throw new Error(('message' in payload && payload.message) || ('error' in payload && payload.error) || t('fetchError'));
+        const apiMessage = ('message' in payload && payload.message) || ('error' in payload && payload.error);
+        throw new Error(apiMessage && !apiMessage.includes('support@') ? apiMessage : t('fetchError'));
       }
 
       const nextRates: Record<string, number> = { USD: 1 };
